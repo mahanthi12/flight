@@ -136,6 +136,7 @@ public class FlightServiceImplementation implements FlightService {
 		 if(flight== null) {
 			 throw new IdNotFoundException("Flight id is not present in the db");
 		 }
+		 System.out.println(flight);
 		 return flight;
 	 }
 }
