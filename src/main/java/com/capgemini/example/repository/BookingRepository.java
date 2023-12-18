@@ -6,4 +6,5 @@ import com.capgemini.example.entity.Booking;
 
 public interface BookingRepository extends JpaRepository<Booking, Integer>{
 
+	Booking findBookingsByBookingId(int bookingId);
 }

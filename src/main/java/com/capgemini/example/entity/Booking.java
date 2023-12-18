@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,9 +29,9 @@ public class Booking {
 	 @GeneratedValue(strategy=GenerationType.IDENTITY)
 	 @Column(name="booking_id")
 	 private int bookingId;
-	 private long bookingNumber;
 	 private LocalDateTime bookingDate;
 	 private LocalDateTime travelDate;
+	 @JsonProperty(access=Access.WRITE_ONLY)
 	 private double totalCost;
 	 private double amount;
 	 @ManyToOne
@@ -44,16 +46,19 @@ public class Booking {
 	 @OneToOne
 	 @JoinColumn(name="flight_id")
 	 private Flight flight;
+	 
+	 @Column(name="booking_status")
+	 private String bookingStatus;
 
 	public Booking() {
 		super();
 	}
 
-	public Booking( long bookingNumber, LocalDateTime bookingDate, LocalDateTime travelDate, double totalCost,
-			double amount, User user, List<Passenger> passengers, Flight flight) {
+	public Booking( LocalDateTime bookingDate, LocalDateTime travelDate, double totalCost,
+			double amount, User user, List<Passenger> passengers, Flight flight, String bookingStatus) {
 		super();
 		
-		this.bookingNumber = bookingNumber;
+		//this.bookingNumber = bookingNumber;
 		this.bookingDate = bookingDate;
 		this.travelDate = travelDate;
 		this.totalCost = totalCost;
@@ -61,6 +66,7 @@ public class Booking {
 		this.user = user;
 		this.passengers = passengers;
 		this.flight = flight;
+		this.bookingStatus=bookingStatus;
 	}
 
 	public int getBookingId() {
@@ -70,17 +76,7 @@ public class Booking {
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-
-	public long getBookingNumber() {
-		return bookingNumber;
-	}
-
-	public void setBookingNumber(long bookingNumber) {
-		this.bookingNumber = bookingNumber;
-	}
-
 	
-
 	public LocalDateTime getBookingDate() {
 		return bookingDate;
 	}
@@ -135,13 +131,24 @@ public class Booking {
 
 	public void setFlight(Flight flight) {
 		this.flight = flight;
+		this.amount=this.flight.getFare();
+	}
+	
+	
+
+	public String getBookingStatus() {
+		return bookingStatus;
+	}
+
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", bookingNumber=" + bookingNumber + ", bookingDate=" + bookingDate
+		return "Booking [bookingId=" + bookingId + ", bookingDate=" + bookingDate
 				+ ", travelDate=" + travelDate + ", totalCost=" + totalCost + ", amount=" + amount + ", user=" + user.getUserId()
-				+ ", passengers=" + passengers + ", flight=" + flight.getFlightId() + "]";
+				+ ", passengers=" + passengers + ", flight=" + flight.getFlightId() + ", bookingStatus="+bookingStatus+"]";
 	}
 	 
 	 

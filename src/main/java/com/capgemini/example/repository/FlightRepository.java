@@ -22,6 +22,11 @@ public interface FlightRepository extends JpaRepository<Flight, Integer>{
 	@Query("SELECT f FROM Flight f WHERE f.departureLocation=?1 and f.arrivalLocation=?2 and f.departureTime =?3")
 	    List<Flight> findFlightsByLocationsAndDate(@Param("departureLocation") String departureLocation,@Param("arrivalLocation") String arrivalLocation,@Param("departureTime") LocalDateTime departureTime);
 	 
+	
+	@Query("SELECT f FROM Flight f WHERE f.departureLocation=?1 and f.arrivalLocation=?2 and f.fare <=?3")
+    List<Flight> findFlightsByLocationsAndFare(@Param("departureLocation") String departureLocation,@Param("arrivalLocation") String arrivalLocation,@Param("fare") Double fare);
+	
+	
 	@Query("SELECT f FROM Flight f WHERE f.fare <=?1")
 	    List<Flight> findFlightsByFare(@Param("fare") Double fare);
 	 

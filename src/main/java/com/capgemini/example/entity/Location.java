@@ -115,6 +115,23 @@ public class Location {
 		this.airportName = airportName;
 		this.flight = flight;
 	}
+
+
+	public Location(int locationId, String name, String code, String country, String airportName) {
+		super();
+		this.locationId = locationId;
+		this.name = name;
+		this.code = code;
+		this.country = country;
+		this.airportName = airportName;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Location [locationId=" + locationId + ", name=" + name + ", code=" + code + ", country=" + country
+				+ ", airportName=" + airportName + ", flight=" + flight + "]";
+	}
 	
 	
 

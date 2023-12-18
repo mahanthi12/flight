@@ -10,7 +10,6 @@ import com.capgemini.example.entity.User;
 public class BookingDto {
 	
 	 private int bookingId;
-	 private long bookingNumber;
 	 private LocalDateTime bookingDate;
 	 private LocalDateTime travelDate;
 	 private double totalCost;
@@ -31,10 +30,10 @@ public class BookingDto {
 
 	
 
-	public BookingDto( long bookingNumber, LocalDateTime bookingDate, LocalDateTime travelDate, double totalCost,
+	public BookingDto(LocalDateTime bookingDate, LocalDateTime travelDate, double totalCost,
 			double amount, User user,  Flight flight) {
 		super();
-		this.bookingNumber = bookingNumber;
+		//this.bookingNumber = bookingNumber;
 		this.bookingDate = bookingDate;
 		this.travelDate = travelDate;
 		this.totalCost = totalCost;
@@ -55,58 +54,33 @@ public class BookingDto {
 		this.bookingId = bookingId;
 	}
 
-
-	public long getBookingNumber() {
-		return bookingNumber;
-	}
-
-
-	public void setBookingNumber(long bookingNumber) {
-		this.bookingNumber = bookingNumber;
-	}
-
-
-	
-
-
 	public LocalDateTime getBookingDate() {
 		return bookingDate;
 	}
-
-
 
 	public void setBookingDate(LocalDateTime bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 
-
-
 	public LocalDateTime getTravelDate() {
 		return travelDate;
 	}
-
-
 
 	public void setTravelDate(LocalDateTime travelDate) {
 		this.travelDate = travelDate;
 	}
 
-
-
 	public double getTotalCost() {
 		return totalCost;
 	}
-
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
 
-
 	public double getAmount() {
 		return amount;
 	}
-
 
 	public void setAmount(double amount) {
 		this.amount = amount;
@@ -120,8 +94,6 @@ public class BookingDto {
 //	public void setPassengers(List<Passenger> passengers) {
 //		this.passengers = passengers;
 //	}
-
-
 
 	public User getUser() {
 		return user;

@@ -2,6 +2,7 @@ package com.capgemini.example.service;
 
 import java.util.List;
 
+import com.capgemini.example.dto.AdminDto;
 import com.capgemini.example.dto.UserDto;
 import com.capgemini.example.entity.User;
 import com.capgemini.example.exception.AlreadyExistsException;
@@ -27,4 +28,5 @@ public interface UserService {
 	UserDto getUserDashboard(int userId) throws IdNotFoundException;
 	User getUserById(int userId) throws IdNotFoundException;
 	
+	AdminDto getAdminDashboard(int userId) throws IdNotFoundException;
 }

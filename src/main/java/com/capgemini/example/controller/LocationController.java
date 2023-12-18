@@ -26,7 +26,7 @@ public class LocationController {
 	@Autowired
 	LocationService service;
 	
-	@PostMapping("/addLocation")
+	@PostMapping("/addLocation/admin")
 	public ResponseEntity<Location> addFlightLocations(@RequestBody Location location){
 		return new ResponseEntity<Location>(service.addLocation(location), HttpStatus.OK);
 	}
@@ -36,13 +36,13 @@ public class LocationController {
 		return new ResponseEntity<List<Location>>(service.getLocation(), HttpStatus.OK);
 	}
 	
-	@PutMapping("/update-location/{locationid}")
+	@PutMapping("/update-location/admin/{locationid}")
 	public ResponseEntity<Location> updateLocationById(@PathVariable("locationid") Integer locationId,@RequestBody Location location) throws IdNotFoundException
 	{
 		return new ResponseEntity<Location>(service.updateLocationById(locationId,location), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete-location/{locationId}")
+	@DeleteMapping("/admin/delete-location/{locationId}")
 	public ResponseEntity<String> deleteLocationById(@PathVariable("locationId") Integer locationId,@RequestBody Location location) throws IdNotFoundException
 	{
 		return new ResponseEntity<String> (service.deleteLocationById(locationId), HttpStatus.OK);

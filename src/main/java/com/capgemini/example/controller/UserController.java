@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.example.dto.AdminDto;
 import com.capgemini.example.dto.UserDto;
 import com.capgemini.example.entity.User;
 import com.capgemini.example.exception.AlreadyExistsException;
@@ -54,15 +55,15 @@ public class UserController {
 		return new ResponseEntity<String>(userService.deleteUserById(userId), HttpStatus.OK);
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("/admin/get-users")
 	public ResponseEntity<List<User>> getAllUsers(){
 		return new ResponseEntity<List<User>>(userService.getAllUsers(),HttpStatus.OK);
 	}
-	@GetMapping("/dashboard/{userId}")
+	@GetMapping("/userDashboard/{userId}")
 	public ResponseEntity<UserDto> userDashboard(@PathVariable("userId") int userId) throws IdNotFoundException{
 		return new ResponseEntity<UserDto>(userService.getUserDashboard(userId),HttpStatus.OK);
 	}
-	@GetMapping("/user/{userId}")
+	@GetMapping("/get-user/{userId}")
 	public ResponseEntity<User> getUserById(@PathVariable("userId") int userId) throws IdNotFoundException{
 		return new ResponseEntity<User>(userService.getUserById(userId),HttpStatus.OK);
 	}
@@ -74,6 +75,11 @@ public class UserController {
 	@PostMapping("/resetPassword/{userId}")
 	public ResponseEntity<String> forgotPassword(@PathVariable("userId") int userId,@RequestBody UserDto userDto)  throws InvalidPasswordException, IdNotFoundException{
 		return new ResponseEntity<String>(userService.resetUserPassword(userId,userDto),HttpStatus.OK);
+	}
+	
+	@GetMapping("/adminDashboard/{userId}")
+	public ResponseEntity<AdminDto> adminDashboard(@PathVariable("userId") int userId) throws IdNotFoundException{
+		return new ResponseEntity<AdminDto>(userService.getAdminDashboard(userId),HttpStatus.OK);
 	}
 }
 	

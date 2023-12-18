@@ -9,5 +9,5 @@ public class OnlineFlightTicketBookingSystem1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineFlightTicketBookingSystem1Application.class, args);
 	}
-
+ 
 }

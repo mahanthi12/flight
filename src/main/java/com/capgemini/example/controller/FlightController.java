@@ -29,25 +29,20 @@ public class FlightController {
 	@Autowired
 	FlightService flightservice;
 	
-	@PostMapping("/add-flights")
-	public ResponseEntity<Flight> addFlights(@RequestBody Flight flights){
-		return new ResponseEntity<Flight>(flightservice.addFlights(flights), HttpStatus.OK);
+	@PostMapping("/add-flights/admin/{userid}")
+	public ResponseEntity<Flight> addFlights(@PathVariable("userid") int userid, @RequestBody Flight flights){
+		return new ResponseEntity<Flight>(flightservice.addFlights(userid, flights), HttpStatus.OK);
 	}
 	
-//	@PostMapping("/addFlight2")
-//	public ResponseEntity<Flight> addFlights(@RequestBody FlightDto flightDto){
-//		return new ResponseEntity<Flight>(service.addFlight2(flightDto), HttpStatus.OK);
-//	}
-	
-	@GetMapping("/get-flights")
+	@GetMapping("/getAllflights")
 	public ResponseEntity <List<Flight>> getAllFlights()throws FlightNotFoundException{
 		return new ResponseEntity<List<Flight>>(flightservice.getFlights(),HttpStatus.OK);
 	}
 	
-	@PutMapping("/update-flight/{flightid}")
-	public ResponseEntity<Flight> updateFlightById(@PathVariable("flightid") Integer flightid,@RequestBody Flight flight) throws IdNotFoundException,FlightNotFoundException
+	@PutMapping("/update-flight/admin/{flightId}")
+	public ResponseEntity<Flight> updateFlightById(@PathVariable("flightId") int flightId,@RequestBody Flight flight) throws IdNotFoundException,FlightNotFoundException
 	{
-		return new ResponseEntity<Flight>(flightservice.updateFlight(flightid,flight), HttpStatus.OK);
+		return new ResponseEntity<Flight>(flightservice.updateFlight(flightId,flight), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete-flight/{flightId}")
@@ -59,7 +54,7 @@ public class FlightController {
 	@GetMapping("/getFlightsByLocationId/{locationId}")
 	public ResponseEntity<List<Flight>> getFlightsByLocationId(@PathVariable("locationId") int locationId)throws IdNotFoundException, FlightNotFoundException{
 		return new ResponseEntity<List<Flight>> (flightservice.getFlightsByLocationId(locationId), HttpStatus.OK);
-	}
+	}  
 	
 	@GetMapping("/getFlightsByLocations/{departureLocation}/{arrivalLocation}") 
 	public ResponseEntity<List<Flight>> getFlightsByLocation(@PathVariable String departureLocation, @PathVariable String arrivalLocation) throws FlightNotFoundException{
@@ -68,6 +63,11 @@ public class FlightController {
 	@GetMapping("/getFlightbyLocationsAndDate/{departureLocation}/{arrivalLocation}/{departureTime}") 
 	public ResponseEntity<List<Flight>> findFlightsByLocationsAndDate(@PathVariable String departureLocation,@PathVariable String arrivalLocation,@PathVariable LocalDateTime departureTime) throws FlightNotFoundException{
 		return new ResponseEntity<List<Flight>>(flightservice.findFlightsByLocationsAndDate(departureLocation,arrivalLocation,departureTime),HttpStatus.OK) ;
+}
+	
+	@GetMapping("/getFlightbyLocationsAndFare/{departureLocation}/{arrivalLocation}/{fare}") 
+	public ResponseEntity<List<Flight>> findFlightsByLocationsAndDate(@PathVariable String departureLocation,@PathVariable String arrivalLocation,@PathVariable Double fare) throws FlightNotFoundException{
+		return new ResponseEntity<List<Flight>>(flightservice.findFlightsByLocationsAndFare(departureLocation,arrivalLocation,fare),HttpStatus.OK) ;
 }
 	@GetMapping("/getFlightByFare/{fare}")
 	public ResponseEntity<List<Flight>> findByFareLessThanEquals(@PathVariable Double fare) throws FlightNotFoundException{

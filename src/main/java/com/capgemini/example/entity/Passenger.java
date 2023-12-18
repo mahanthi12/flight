@@ -40,6 +40,18 @@ public class Passenger {
 		this.mealPref = mealPref;
 		this.booking = booking;
 	}
+	
+	public Passenger(int passengerId, String firstName, String lastName, int age, char gender, String passportNo,
+			String mealPref) {
+		super();
+		this.passengerId = passengerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.gender = gender;
+		this.passportNo = passportNo;
+		this.mealPref = mealPref;
+	}
 	public int getPassengerId() {
 		return passengerId;
 	}

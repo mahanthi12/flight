@@ -20,7 +20,7 @@ public class passengerController {
 	@Autowired
 	PassengerService passengerService;
 	
-	@PostMapping("/add-passengers")
+	@PostMapping("/add-passengers/user")
 	public ResponseEntity<Passenger> addPassengers(@RequestBody Passenger passenger){
 		return new ResponseEntity<Passenger>(passengerService.addPassenger(passenger), HttpStatus.OK);
 	} 

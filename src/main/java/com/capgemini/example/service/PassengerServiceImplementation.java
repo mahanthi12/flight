@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.capgemini.example.entity.Location;
 import com.capgemini.example.entity.Passenger;
 import com.capgemini.example.repository.PassengerRepository;
 

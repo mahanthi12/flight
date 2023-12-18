@@ -51,6 +51,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 	        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
 		}
 		
+		@ExceptionHandler(ApplicationException.class)
+		public ResponseEntity<ErrorResponse> applicationException(ApplicationException applicationException)
+		{
+	       
+	        errorResponse.setErrormessage(applicationException.getMsg());
+	        errorResponse.setStatus(HttpStatus.FORBIDDEN.toString());
+	        errorResponse.setLocalDateTime(LocalDateTime.now());
+	        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.FORBIDDEN);
+		}
+		
 		@ExceptionHandler(FlightNotFoundException.class)
 		public ResponseEntity<ErrorResponse> handleFlight(FlightNotFoundException flightNotFoundException)
 		{

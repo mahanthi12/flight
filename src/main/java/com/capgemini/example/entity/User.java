@@ -2,6 +2,8 @@ package com.capgemini.example.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -22,7 +24,7 @@ public class User {
 	private int userId;
 	
 	private String userName;
-
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private String password;
 	
 	private String firstName;
@@ -38,6 +40,8 @@ public class User {
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 
 	private List<Booking> booking;
+	
+    private String role="user";
 
 	
 	public User() {
@@ -56,6 +60,46 @@ public class User {
 		this.mobileNo = mobileNo;
 		this.address = address;
 		this.booking = booking;
+	}
+
+	
+
+	public User(String userName, String password, String firstName, String lastName, String email, long mobileNo,
+			Address address, List<Booking> booking, String role) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.address = address;
+		this.booking = booking;
+		this.role = role;
+	}
+
+	
+	
+
+	public User(int userId, String userName, String password, String firstName, String lastName, String email,
+			long mobileNo, Address address, List<Booking> booking, String role) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.mobileNo = mobileNo;
+		this.address = address;
+		this.booking = booking;
+		this.role = role;
+	}
+
+
+	public User(int userId, String role) {
+		this.userId=userId;
+		this.role=role;
 	}
 
 
@@ -148,13 +192,26 @@ public class User {
 		this.booking = booking;
 	}
 
+	
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + ", mobileNo=" + mobileNo + ", address="
-				+ address + ", booking=" + booking + "]";
+				+ address + ", booking=" + booking + ", role=" + role + "]";
 	}
+
+
 	
 	
 	

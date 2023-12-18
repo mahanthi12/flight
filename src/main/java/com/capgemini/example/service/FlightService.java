@@ -13,13 +13,13 @@ import com.capgemini.example.exception.IdNotFoundException;
 
 public interface FlightService {
 
-	Flight addFlights(Flight flights);
+	Flight addFlights(int userId, Flight flights);
 	
 	//Flight addFlight2(FlightDto flightDto);
 	
 	List<Flight> getFlights()throws FlightNotFoundException;
 	
-	Flight updateFlight(int flightid, Flight flight) throws IdNotFoundException, FlightNotFoundException;
+	Flight updateFlight(int flightId, Flight flight) throws IdNotFoundException, FlightNotFoundException;
 	
 	String deleteFlightById(int flightId)throws IdNotFoundException, FlightNotFoundException;
 	
@@ -27,6 +27,7 @@ public interface FlightService {
 	
 	List<Flight> findFlightsByLocations(String departureLocation, String arrivalLocation)throws FlightNotFoundException;
 	List<Flight> findFlightsByLocationsAndDate(String departureLocation,String arrivalLocation,LocalDateTime departureTime) throws FlightNotFoundException;
+	List<Flight> findFlightsByLocationsAndFare(String departureLocation,String arrivalLocation,Double fare) throws FlightNotFoundException;
 	 List<Flight> findByFareLessThanEqual(Double fare) throws FlightNotFoundException;
 	 List<Flight> findFlightsByDate(@Param("departureTime") LocalDateTime departureTime) throws FlightNotFoundException;
 	 Flight findFlightsByFlightId(@Param("flightId") int flightId)throws IdNotFoundException;

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -28,7 +30,12 @@ public class Flight {
 	private double fare;
 	private LocalDateTime departureTime;
 	private LocalDateTime arrivalTime;
+	
+	
+	
+	@JsonProperty(access=Access.WRITE_ONLY)
 	private int remainingSeats;
+	
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="location_id",referencedColumnName="location_id")
 	@JsonBackReference(value="location_id")
@@ -38,6 +45,26 @@ public class Flight {
 	public Flight() {
 		super();
 	}
+
+	public Flight(int flightId, String departureLocation, String arrivalLocation, String code, String model,
+			int totalSeats, double fare, LocalDateTime departureTime, LocalDateTime arrivalTime, int remainingSeats,
+			Location locations) {
+		super();
+		this.flightId = flightId;
+		this.departureLocation = departureLocation;
+		this.arrivalLocation = arrivalLocation;
+		this.code = code;
+		this.model = model;
+		this.totalSeats = totalSeats;
+		this.fare = fare;
+		this.departureTime = departureTime;
+		this.arrivalTime = arrivalTime;
+		this.remainingSeats = remainingSeats;
+		this.locations = locations;
+	}
+
+
+	
 
 
 	public Flight(String departureLocation, String arrivalLocation, String code, String model, int totalSeats,
@@ -56,6 +83,25 @@ public class Flight {
 		this.remainingSeats=remainingSeats;
 		this.locations = locations;
 	}
+	
+
+
+	public Flight(int flightId, String departureLocation, String arrivalLocation, String code, String model,
+			int totalSeats, double fare, LocalDateTime departureTime, LocalDateTime arrivalTime, int remainingSeats) {
+		super();
+		this.flightId = flightId;
+		this.departureLocation = departureLocation;
+		this.arrivalLocation = arrivalLocation;
+		this.code = code;
+		this.model = model;
+		this.totalSeats = totalSeats;
+		this.fare = fare;
+		this.departureTime = departureTime;
+		this.arrivalTime = arrivalTime;
+		this.remainingSeats = remainingSeats;
+	}
+
+
 
 
 	public int getFlightId() {
@@ -115,6 +161,7 @@ public class Flight {
 
 	public void setTotalSeats(int totalSeats) {
 		this.totalSeats = totalSeats;
+		this.remainingSeats = this.totalSeats;
 	}
 
 	public double getFare() {
